@@ -34,6 +34,21 @@ void Homework::PrintBoard()
 	}
 }
 
+void Homework::Win()
+{
+	renderMessage += std::to_string(WINNING_SCORE) + "빙고 완성으로 승리하셨습니다. (" + std::to_string(cnt_attempt + 1) + " 시도)\n";
+	CallRender();
+	gameState = GameState::EXIT;
+}
+
+void Homework::GameOver()
+{
+	renderMessage += "넣을 수 있는 숫자가 " + std::to_string(MAX_NUM - MIN_NUM + 1) + "개 밖에 없는데 왜 " + std::to_string(MAX_ATTEMPT) + "번 시도하고도 못하셨습니까...\n";
+	renderMessage += "이제 그만 해요.\n";
+	CallRender();
+	gameState = GameState::EXIT;
+}
+
 int Homework::GetCountBingo()
 {
 	int bingo = 0;
@@ -109,17 +124,17 @@ void Homework::Input()
 
 void Homework::Check()
 {
-	renderMessage += std::to_string(input) + (CheckHit(input) ?" Hit\n" : " 실패...\n");
-
-	sleepTime = 1000;
-	//입력횟수 증가
+	bool check = CheckHit(input);
+	renderMessage += std::to_string(input) + (check ?" Hit\n" : " 실패...\n");
 
 	int bingo = GetCountBingo();
 	renderMessage += "현재 "+std::to_string(bingo)+"빙고\n";
 	CallRender();
 
-	if (bingo == WINNING_SCORE)
+	if (bingo >= WINNING_SCORE)
 		gameState = GameState::WIN;
+	else if(cnt_attempt == MAX_ATTEMPT)
+		gameState = GameState::GAME_OVER;
 	else
 		gameState = GameState::CALL_INPUT;
 	
@@ -128,43 +143,11 @@ void Homework::Check()
 bool Homework::CheckHit(int input)
 {
 	for (int i = 0; i < BOARD_SIZE; i++) {
-		for (int j = 0; j < BOARD_SIZE; j++) {
-			if (board[i][j] == input) {
+		for (int j = 0; j < BOARD_SIZE; j++)
+			if (!hitBoard[i][j] && board[i][j] == input)
 				return hitBoard[i][j] = true;
-			}
-		}
 	}
 	return false;
-}
-
-void Homework::Update()
-{
-	switch (gameState)
-	{
-	case Homework::GameState::INIT:
-		gameState = GameState::CALL_INPUT;
-		break;
-	case Homework::GameState::CALL_INPUT:
-		Input();
-		break;
-	case Homework::GameState::CHECK:
-		Check();
-		break;
-	case Homework::GameState::WIN:
-		renderMessage += std::to_string(WINNING_SCORE) + "빙고 완성으로 승리하셨습니다. ("+ std::to_string(cnt_attempt+1) + " 시도)\n";
-		CallRender();
-		gameState = GameState::EXIT;
-		break;
-	case Homework::GameState::GAME_OVER:
-		gameState = GameState::EXIT;
-		break;
-	case Homework::GameState::EXIT:
-		renderMessage += "게임을 종료합니다\n";
-		break;
-	default:
-		break;
-	}
-
 }
 
 void Homework::Render()
@@ -173,7 +156,7 @@ void Homework::Render()
 		return;
 
 	system("cls");
-	printf("빙고게임\n");
+	printf("[빙고게임]\n");
 	PrintBoard();
 	PrintAttempt();
 	PrintLog();
