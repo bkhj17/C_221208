@@ -106,6 +106,34 @@ void Homework::Init()
 	int input = 0;
 }
 
+void Homework::Update()
+{
+	switch (gameState)
+	{
+	case GameState::INIT:
+		gameState = GameState::INPUT;
+		break;
+	case GameState::INPUT:
+		Input();
+		break;
+	case GameState::CHECK:
+		Check();
+		break;
+	case GameState::WIN:
+		Win();
+		break;
+	case GameState::GAME_OVER:
+		GameOver();
+		break;
+	case GameState::EXIT:
+		renderMessage += "게임을 종료합니다\n";
+		break;
+	default:
+		break;
+	}
+
+}
+
 void Homework::Input()
 {
 	input = 0;
@@ -136,7 +164,7 @@ void Homework::Check()
 	else if(cnt_attempt == MAX_ATTEMPT)
 		gameState = GameState::GAME_OVER;
 	else
-		gameState = GameState::CALL_INPUT;
+		gameState = GameState::INPUT;
 	
 }
 
@@ -158,6 +186,8 @@ void Homework::Render()
 	system("cls");
 	printf("[빙고게임]\n");
 	PrintBoard();
+
+	if (gameState == GameState::CHECK || gameState == GameState::INPUT)
 	PrintAttempt();
 	PrintLog();
 	printf("%s", renderMessage.c_str());

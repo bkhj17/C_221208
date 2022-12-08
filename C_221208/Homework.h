@@ -39,10 +39,12 @@ private:
 	}
 	std::string renderMessage;
 
+	void Win();
+	void GameOver();
 private:
 	enum class GameState {
 		INIT,
-		CALL_INPUT,
+		INPUT,
 		CHECK,
 		WIN,
 		GAME_OVER,
