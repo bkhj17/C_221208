@@ -19,11 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Baseball.cpp" />
     <ClCompile Include="Homework.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MultiArray.cpp" />
+    <ClCompile Include="UsefulFunc.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Base.h" />
+    <ClInclude Include="Baseball.h" />
     <ClInclude Include="Homework.h" />
+    <ClInclude Include="MultiArray.h" />
+    <ClInclude Include="UsefulFunc.h" />
+    <ClInclude Include="UsefulType.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
