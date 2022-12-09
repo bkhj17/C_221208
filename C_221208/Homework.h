@@ -1,6 +1,5 @@
 #pragma once
 #include "Base.h"
-#include "UsefulType.h"
 #include <string>
 
 class Homework : public Base
@@ -25,6 +24,9 @@ private:
 	int logArr[MAX_ATTEMPT] = {0};
 	int GetLastInput() { cnt_attempt <= 0 ? 0 : logArr[cnt_attempt - 1]; }
 	int GetCountBingo();
+
+	void Win();
+	void GameOver();
 private:
 	//출력 관련
 	void PrintAttempt();
@@ -38,9 +40,6 @@ private:
 		renderOrder = true;
 	}
 	std::string renderMessage;
-
-	void Win();
-	void GameOver();
 private:
 	enum class GameState {
 		INIT,

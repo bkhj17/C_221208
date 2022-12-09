@@ -19,18 +19,9 @@ inline void Swap(T& a, T& b)
 	b = tmp;
 }
 
-template <typename T>
-inline void Swap(T* a, T* b)	//주소 참조
+inline int MakeRandByRange(const int& a, const int& b)
 {
-	T tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-template <typename T>
-inline T MakeRandByRange(const T& a, const T& b)
-{
-	T mn = Min(a, b), mx = Max(a, b);
+	int mn = Min(a, b), mx = Max(a, b);
 	return rand() % (mx - mn + 1) + mn;
 }
 

@@ -36,7 +36,7 @@ void Homework::PrintBoard()
 
 void Homework::Win()
 {
-	renderMessage += std::to_string(WINNING_SCORE) + "ºù°í ¿Ï¼ºÀ¸·Î ½Â¸®ÇÏ¼Ì½À´Ï´Ù. (" + std::to_string(cnt_attempt + 1) + " ½Ãµµ)\n";
+	renderMessage += std::to_string(WINNING_SCORE) + "ºù°í ¿Ï¼ºÀ¸·Î ½Â¸®ÇÏ¼Ì½À´Ï´Ù. (" + std::to_string(cnt_attempt) + " ½Ãµµ)\n";
 	CallRender();
 	gameState = GameState::EXIT;
 }

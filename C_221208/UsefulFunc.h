@@ -13,8 +13,7 @@ inline void Swap(T& a, T& b);
 template <typename T>
 inline void Swap(T* a, T* b);
 
-template <typename T>
-inline T MakeRandByRange(const T& a, const T& b);
+inline int MakeRandByRange(const int& a, const int& b);
 
 void Shuffle(uint* arr, const uint& arr_length, const uint& n_shuffle);
 
